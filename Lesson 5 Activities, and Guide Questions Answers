@@ -1,0 +1,147 @@
+Activity  1:
+
+DECLARE
+    movie_title VARCHAR2(50) := 'Inside Out 2';
+    director VARCHAR2(50) := 'Kelsey Mann';  -- Updated with known director
+    release_year NUMBER := 2024;
+    rating NUMBER := 9.0;  -- Adjust this once you've seen the movie!
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Movie Title: ' || movie_title || 
+                         ', Director: ' || director || 
+                         ', Release Year: ' || release_year || 
+                         ', Rating: ' || rating);
+END;
+
+
+view_count NUMBER := 1;
+view_count := view_count + 1;
+
+genre VARCHAR2(30) := 'Animated Comedy';
+favorite_character VARCHAR2(50) := 'Joy';
+
+•How would you modify the code if you added another viewing of the movie?
+
+Add a variable called view_count to track how many times you've watched the movie, then increase it within the BEGIN block. 
+
+
+•Could you add an extra detail, like genre or favorite character?
+
+Yes,  can add a genre variable to indicate the movie type, or favorite_character to specify a character you like.  
+
+
+Activity 2:
+ DECLARE
+    monthly_savings NUMBER := 25;
+    months NUMBER := 6;
+    bonus NUMBER := 20;
+    total_savings NUMBER;
+BEGIN
+    -- Calculate total savings including the bonus
+    total_savings := (monthly_savings * months) + bonus;
+
+    DBMS_OUTPUT.PUT_LINE('After ' || months || ' months, including a bonus, you have saved a total of PHP ' || total_savings || '.');
+END;
+
+
+
+•How would you modify the code if your monthly savings amount changed?
+
+I would modify the monthly_savings variable. For example, if your savings increase to PHP 30 per month, you would simply update the declaration of monthly_savings.
+
+•Can you add a bonus amount for a one-time achievement?
+
+Yes, I can add a bonus by declaring a new variable bonus and including it in the total savings calculation. For instance, if  received an extra PHP 20 as a bonus for a one-time achievement, you can declare the bonus and add it to your total savings calculation. 
+
+
+Activity 3:
+ DECLARE
+    allowance NUMBER := 200;     
+    item_price NUMBER := 150;  
+ BEGIN
+    IF allowance >= item_price THEN
+        DBMS_OUTPUT.PUT_LINE('You can buy the item!');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Your allowance is not enough. Try saving more!');
+    END IF;
+END;
+
+
+• What happens if the condition changes (e.g., passing grade increases)?
+
+-If the condition changes, for example, if the price of the item increases, we can update the value of item_price. For instance, if the price goes up to 250, we would change the line item_price := 250;. This would then create a new condition to determine if the allowance is still enough to buy the item.
+
+
+Can you add a special message for an extra-high score or value?
+
+-Yes, we can add a special message if there’s extra allowance left after buying the item.
+
+
+Activity 4:
+CREATE TABLE favorite_books (
+    book_id NUMBER,
+    title VARCHAR2(100),
+    author VARCHAR2(100),
+    genre VARCHAR2(50),
+    year_published NUMBER
+);
+
+INSERT INTO favorite_books (book_id, title, author, genre, year_published) 
+VALUES (1, 'Hell University', 'KnightinBlack', 'mystery/thriller', 2015);
+
+INSERT INTO favorite_books (book_id, title, author, genre, year_published) 
+VALUES (2, 'Chasing Hell', 'KnightinBlack', 'mystery/thriller', 2015);
+
+INSERT INTO favorite_books (book_id, title, author, genre, year_published) 
+VALUES (3, 'Wicked Hearts', 'KnightinBlack', 'Romance', 2016);
+
+UPDATE favorite_books
+SET genre = 'Hell University'
+WHERE book_id = 1;
+
+DELETE FROM favorite_books
+WHERE book_id = 1;
+
+
+Activity 5:
+ CREATE TABLE indoor_games (
+    kid_id NUMBER,
+    kid_name VARCHAR2(50)
+);
+
+CREATE TABLE outdoor_games (
+    kid_id NUMBER,
+    kid_name VARCHAR2(50)
+);
+-- Indoor Games
+INSERT INTO indoor_games VALUES (1, 'micka');
+INSERT INTO indoor_games VALUES (2, 'Liam');
+INSERT INTO indoor_games VALUES (3, 'Sam');
+
+-- Outdoor Games
+INSERT INTO outdoor_games VALUES (1, 'micka');
+INSERT INTO outdoor_games VALUES (3, 'Sam');
+INSERT INTO outdoor_games VALUES (4, 'colet');
+SELECT indoor_games.kid_name
+FROM indoor_games
+JOIN outdoor_games ON indoor_games.kid_id = outdoor_games.kid_id;
+
+ALTER TABLE indoor_games ADD favorite_game VARCHAR2(50);
+ALTER TABLE outdoor_games ADD favorite_game VARCHAR2(50);
+
+UPDATE indoor_games SET favorite_game = 'Chess' WHERE kid_id = 1;UPDATE indoor_games SET favorite_game = 'Table Tennis' WHERE kid_id = 2;
+UPDATE indoor_games SET favorite_game = 'throws' WHERE kid_id = 3;
+
+UPDATE outdoor_games SET favorite_game = 'Soccer' WHERE kid_id = 1;
+UPDATE outdoor_games SET favorite_game = 'Basketball' WHERE kid_id = 3;
+UPDATE outdoor_games SET favorite_game = 'Badminton' WHERE kid_id = 4;
+
+SELECT indoor_games.kid_name, indoor_games.favorite_game AS indoor_favorite,
+       outdoor_games.favorite_game AS outdoor_favorite  
+FROM indoor_games
+JOIN outdoor_games ON indoor_games.kid_id = outdoor_games.kid_id;
+
+SELECT COALESCE(indoor_games.kid_name, outdoor_games.kid_name) AS kid_name
+FROM indoor_games
+FULL OUTER JOIN outdoor_games ON indoor_games.kid_id = outdoor_games.kid_id;
+
