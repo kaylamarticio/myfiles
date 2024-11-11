@@ -7,6 +7,4 @@ PL/SQL Projects: View examples of my work in PL/SQL that show my expertise with 
 
 Coding Challenges and Practice Problems: includes solved coding challenges from various platforms, showing problem-solving techniques and different programming approaches.
 
-Other Projects:  includes projects from other languages or frameworks, showing my versatility and growth as a programmer.Let me know if you want to add anything.
-
-
+Other Projects:  includes projects from other languages or frameworks, showing my versatility and growth as a programmer.
