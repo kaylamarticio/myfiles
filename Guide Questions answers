@@ -1,0 +1,52 @@
+1. The PL/SQL is a procedu ral language designed spec ifically
+to embrace SQL statement s within its syntax. The different from SQL is a n interpretive language wh ere a "query" is sent to an engine (Oracle, Postgres, SQLite SQL Server, etc.) which translates the code into a request to return or manipulate data in a structured file. The most common structure being be ing tabular with rows and columns. The PL/SQL language is capable of performing various different operations at any given time.
+
+2. In PL/SQL, all statement s are classified into units t hat
+is called Blocks. PL/SQL bl ocks can include variables, SQL statements, loops, constan ts, conditional statements and exception handling. Blocks can also build a function or a procedure or a package. It can be used to implement procedural logic in a script ing language.
+
+3. PL/SQL Data Types:
+
+-LONG RAW
+
+ex: SQL> CREATE TABLE 11 (id NUMBER, doc LONG RAIN);
+
+Table created.
+
+SQL> INSERT INTO t1 VALU ES (1, utl_raw.cast_to_raw( LONG RAW column'));  Test to go into 1 row created.
+
+-DATE
+
+ex: declare l_today_date = SYSDATE; DATE: l_today_timestamp TIM ESTAMP := SYSTIMESTAM P;l_today_timetzone TIME STAMP WITH TIME ZONE := SYSTIMESTAMP; I_interval
+
+BREAK
+L YEAR (4) TO MONTH := '2 011-11';
+I_interval2
+BREAK
+L DAY (2) TO SECOND := '1 5 00:30:44';
+BEGIN
+null;
+END;
+
+-CLOB
+ clob_rec CLOB; n_rec NUMBER:=100;
+BEGIN
+SELECT LOB INTO clob_re c FROM table1 WHERE ID = 1234;
+n_rec := clob_rec.EXTRAC T('//XPTO/text()', 'xmlns:X PTO').getNumVal();
+END;
+
+4. Control structures are u sed to manage the flow of execution in a program. These struct ures allow developers to di ctate the order in which statements are executed based on certain conditions or loops. It is important be cause they allow developers to control the flow of execution withi n a program.
+
+5. DDL stands for Data Def inition Language and refers to SQL commands used to create, modify, and delete database structures  such as tables, indexes, an d views. DML stands for Data Manipulation Language and refers to SQL commands used to insert update, and delete data wit hin a database.
+
+
+DML example:
+-SELECT
+-INSERT
+-UPDATE
+-DELETE
+
+DDL example:
+-CREATE
+-ALTER
+-DROP
+-TRUNCATE
