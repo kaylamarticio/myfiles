@@ -1,0 +1,52 @@
+Problem Set 3: Personalized Duplicate Testing and Error Handling:
+
+
+Create and Test Duplicate
+
+  1.
+   CREATE TABLE pet_adoptions (
+       adoption_id NUMBER PRIMARY KEY,
+       applicant_name VARCHAR2(100),
+       applicant_email VARCHAR2(100) UNIQUE,
+       pet_id NUMBER
+   );
+   
+
+2. Insert Records with Unique Values: Add a few sample records with unique emails to simulate new adoption requests.
+
+  
+   INSERT INTO pet_adoptions (adoption_id, applicant_name, applicant_email, pet_id)
+   VALUES (1, 'Alice Guo', 'alice.g@example.com', 101);
+
+   INSERT INTO pet_adoptions (adoption_id, applicant_name, applicant_email, pet_id)
+   VALUES (2, 'Sofia Smith', 'sofia.smith@example.com', 102);
+   
+
+3. Attempt Duplicate Insertions: Now, attempt to insert a record with an email that 
+already exists in the database. This should trigger an error due to the unique constraint.
+
+   
+   INSERT INTO pet_adoptions (adoption_id, applicant_name, applicant_email, pet_id)
+   VALUES (3, 'Alice Guo', 'alice.g@example.com', 103);  Duplicate email
+   
+
+
+2: Observe and Document Errors
+
+- When trying to insert the duplicate record, Oracle will likely throw an error 
+similar to:
+  
+  
+  ORA-00001: unique constraint (SCHEMA_NAME.APPLICANT_EMAIL) violated
+  
+
+-  This message indicates that the unique constraint on 'applicant_email' has been 
+violated, meaning an email can appear only once in the table.
+
+
+
+ 3: Reflection
+
+- The ORA-00001 error   happens when you attempt to enter a duplicate 
+value in a field that needs to be unique, such as the email address of a pet adoption database applicant. 
+In order to ensure that each applicant has only one active application, unique constraints restrict duplicate data. When a duplicate is attempted to be added, the database automatically stops it and displays an error. This helps the adoption process go more easily by preventing confusion from duplicate entries and maintaining accurate and clean data.
