@@ -1,0 +1,36 @@
+Problem Set 2: Custom Modifications Using ALTER Command:
+
+Scenario: Pet Adoption Database
+
+ 1. Add a New Column to Each Table
+
+Pets: This table contains information about pets available for adoption.
+Adopters: This table contains information about people who adopt pets.
+
+
+Pets Table: Add a column 'has_vaccinations' to indicate whether a pet has received its vaccinations.
+
+Adopters Table: Add a column 'adoption_date' to store the date when a pet was adopted.
+
+
+SQL Commands for Adding Columns:
+- Adding has_vaccinations column to the Pets table
+ALTER TABLE Pets
+ADD has_vaccinations BOOLEAN;
+
+- Adding adoption_date column to the Adopters table
+ALTER TABLE Adopters
+ADD adoption_date DATE;
+
+
+ 2. Apply a Unique Constraint
+
+We will apply a unique constraint on the `adoption_date` column in the  Adopters table. This will ensure that each adoption happens on a unique date (assuming, for example, only one pet can be adopted on any given day).
+
+ SQL Command for Unique Constraint:
+- Adding unique constraint to the adoption_date column
+ALTER TABLE Adopters
+ADD CONSTRAINT unique_adoption_date UNIQUE (adoption_date);
+
+3: Reflection
+- To help avoid data duplication, the 'adoption_date' column has a unique constraint that makes sure no two adoptions are recorded on the same day. By keeping separate adoption records, this improves the database's accuracy. This enhances the overall usability for tracking and reporting by giving users confidence that the data represents distinct adoption occurrences. However, this restriction would need to be modified in situations when several pets might be adopted on the same day.
