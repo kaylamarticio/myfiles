@@ -1,0 +1,48 @@
+Problem Set 5: Challenge-Personalized Database Design Scenario with Unique Constraints:
+
+Here's a personalized database design scenario based on your interest in managing a collection of books.
+
+1. Define Your Unique Scenario:
+Imagine you are creating a database to track your favorite books and the  authors who wrote them. The two tables could be:
+
+- Books: Contains information about each book.
+- Authors: Contains information about each author.
+
+The relationship between these two tables is that each book is written by one author, and an author can write multiple books.
+
+2. Apply Unique Constraints:
+To ensure data integrity and accuracy, we can apply unique constraints to the following fields:
+
+- Authors table: Ensure that each author has a unique author_id.
+- Books table: Ensure that each book_title is unique for each author. For example, no two books by the same author can have the same title.
+
+Here's an SQL example to define the tables:
+
+
+CREATE TABLE Authors (
+    author_id INT PRIMARY KEY,
+    author_name VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE Books (
+    book_id INT PRIMARY KEY,
+    book_title VARCHAR(255),
+    author_id INT,
+    genre VARCHAR(100),
+    UNIQUE (book_title, author_id),  -- Ensures no duplicate book titles per author
+    FOREIGN KEY (author_id) REFERENCES Authors(author_id)  
+);
+
+
+ 3. Alter the Structure:
+Suppose we want to publication publication year to the Books table. We can use the `ALTER` command to add this new column.
+
+
+ALTER TABLE Books
+ADD COLUMN publication_year INT;
+
+
+ 4. Reflection:
+In this case, using foreign keys and unique constraints guarantees that: 
+- Accuracy: No two books by the same author can have the same title, and no two authors can have the same 'author_id'. - Data Integrity: To avoid orphaned entries, a book must always be associated with an active author thanks to the foreign key relationship. 
+- Easier Data Retrieval: Because each record in the Books table is uniquely recognized by both the title and the author, the  unique constraint enables more effective queries. In order to ensure consistency when retrieving information about books and their authors, the foreign key makes it easier to link data from both tables. With low redundancy and excellent data integrity, this database design will assist in managing and organizing the book collection.
