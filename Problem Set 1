@@ -1,0 +1,63 @@
+Problem Set 1: Personalized Table Creation and Relationship Setup:
+
+1. Define Your Entities
+Scenario: Pet Adoption Agency
+Entities: Adopters and Pets
+
+Table: Adopters
+
+adopter_id (Primary Key, INT)
+first_name (VARCHAR(100))
+last_name (VARCHAR(100))
+email (VARCHAR(255), Unique)
+phone_number (VARCHAR(15))
+address (VARCHAR(255))
+Table: Pets
+
+pet_id (Primary Key, INT)
+name (VARCHAR(100))
+species (VARCHAR(50))
+breed (VARCHAR(100))
+age (INT)
+adopter_id (Foreign Key, INT, references Adopters(adopter_id))
+
+2. Enforce a Unique Constraint
+Adopters table: The email column is unique because each adopter should have a unique email.
+Pets table: There is no need for a unique constraint in this case, as multiple pets may have the same name, species, or breed.
+
+- Create Adopters table
+CREATE TABLE Adopters (
+    adopter_id INT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(255) UNIQUE,
+    phone_number VARCHAR(15),
+    address VARCHAR(255)
+);
+
+
+3. Example Output
+- Create Pets table with a foreign key reference to Adopters
+CREATE TABLE Pets (
+    pet_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    species VARCHAR(50),
+    breed VARCHAR(100),
+    age INT,
+    adopter_id INT,
+    FOREIGN KEY (adopter_id) REFERENCES Adopters(adopter_id)
+);
+
+- Insert sample data into Adopters
+INSERT INTO Adopters (adopter_id, first_name, last_name, email, phone_number, address) 
+VALUES 
+(1, 'Kyla', 'Santos', 'kyla@gmail.com', '09123456789', '123 Street, City'),
+(2, 'Ky', 'Dela Cruz', 'ky@gmail.com', '09123456780', '456 Road, Province');
+
+- Insert sample data into Pets
+INSERT INTO Pets (pet_id, name, species, breed, age, adopter_id) 
+VALUES 
+(1, 'Miguel', 'Dog', 'Golden Retriever', '20', '143');
+
+4. Reflection
+- The foreign key ensures that each pet is connected to a valid adopter, while ang email-only limitation prevents duplicate adopter entries. Together, they make sure that the relationships are accurate and that the data remains consistent across the tables.
