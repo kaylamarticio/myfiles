@@ -37,7 +37,7 @@ already exists in the database. This should trigger an error due to the unique c
 similar to:
   
   
-  ORA-00001: unique constraint (SCHEMA_NAME.APPLICANT_EMAIL) violated
+  ORA-00001: unique constraint (SQL_ZPPYTROGOFLCAUQHGGNPOCZAA.SYS_C00173008900) violated ORA-06512: at "SYS.DBMS_SQL", line 1721
   
 
 -  This message indicates that the unique constraint on 'applicant_email' has been 
@@ -47,6 +47,6 @@ violated, meaning an email can appear only once in the table.
 
  3: Reflection
 
-- The ORA-00001 error   happens when you attempt to enter a duplicate 
+- The "ORA-00001: unique constraint (SQL_ZPPYTROGOFLCAUQHGGNPOCZAA.SYS_C00173008900) violated ORA-06512: at "SYS.DBMS_SQL", line 1721" error happens when you attempt to enter a duplicate 
 value in a field that needs to be unique, such as the email address of a pet adoption database applicant. 
 In order to ensure that each applicant has only one active application, unique constraints restrict duplicate data. When a duplicate is attempted to be added, the database automatically stops it and displays an error. This helps the adoption process go more easily by preventing confusion from duplicate entries and maintaining accurate and clean data.
