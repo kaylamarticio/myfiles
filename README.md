@@ -2,7 +2,8 @@ My Programming Portfolio
 
 
 Welcome to my programming portfolio!
-This repository showcases my work and progress in learning various programming skills. Here, you'll find examples of my PL/SQL statements and other projects as I continue to expand my coding knowledge. 
+This repository showcases my work and progress in learning various programming skills. Here, you'll find examples of my PL/SQL statements and other projects as I continue to 
+expand my coding knowledge. 
 
 PL/SQL Projects, View examples of my work in PL/SQL that show my expertise with database procedures, functions, and triggers. I explore here concepts like data manipulation, exception handling, and control structures. 
 
