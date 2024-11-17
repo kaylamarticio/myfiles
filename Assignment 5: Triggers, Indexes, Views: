@@ -1,0 +1,101 @@
+
+
+Task A: Create a Trigger
+
+Table and Event:  
+Table: `loans`  
+Event: `AFTER UPDATE`
+
+Trigger Code:  
+The trigger logs any changes to the `loan_amount` in a table called `loan_log`.
+
+
+CREATE OR REPLACE TRIGGER log_loan_update
+AFTER UPDATE ON loans
+FOR EACH ROW
+WHEN (OLD.loan_amount != NEW.loan_amount)
+BEGIN
+    INSERT INTO loan_log (log_id, loan_id, old_amount, new_amount, updated_date)
+    VALUES (LOG_SEQ.NEXTVAL, :OLD.loan_id, :OLD.loan_amount, :NEW.loan_amount, SYSDATE);
+END;
+
+
+Explanation: 
+1. The trigger occurs AFTER UPDATE on the 'loans' table. 
+2. It determines whether the 'loan_amount' has changed ('WHEN (OLD.loan_amount!= NEW.loan_amount) '). 
+3. If true, the original and new loan amounts, as well as the date of the change, are recorded in the 'loan_log' table.
+
+
+Task B: Create an Index
+
+Table and Column:  
+Table: `loans`  
+Column: `customer_id`  
+
+SQL Code:
+
+CREATE INDEX idx_customer_id ON loans(customer_id);
+
+
+Explanation:  
+- Indexing the `customer_id` column optimizes queries where loans are retrieved based on specific customers.  
+
+- Example:  
+  
+  SELECT * FROM loans WHERE customer_id = 12345;
+  
+- Without an index, the database does a full table scan to find all loans for a specific consumer. The index helps the database find relevant records faster.
+
+Task C: Create and Manage a View
+
+Criteria:  
+Create a view that shows all overdue loans (loans with a due date earlier than today).
+
+SQL Code:  
+Create View:
+
+CREATE OR REPLACE VIEW overdue_loans AS
+SELECT loan_id, customer_id, loan_amount, due_date
+FROM loans
+WHERE due_date < SYSDATE;
+
+
+Test Query:
+
+SELECT * FROM overdue_loans;
+
+
+Explanation: 
+- The view simplifies retrieving overdue loans by eliminating the need to rewrite the condition 'due_date < SYSDATE' in each query. - This makes it easier to track overdue accounts and provides faster reaction times for collections or follow-ups.
+
+
+Review Questions:
+
+
+1. Triggers: Describe the difference between a BEFORE and an AFTER trigger. 
+- BEFORE Trigger: Runs 'before' an event such as INSERT, UPDATE, or DELETE. It is used to check or edit data before it is saved to a table. Example: Before inserting a record, ensure that the 'loan_amount' is not negative. 
+- AFTER Trigger: Operates 'after' the occurrence. It is commonly used for duties such as logging or updating other tables once the main operation is completed.
+
+
+2. Indexes: Why would you use an index on a frequently queried column?  
+ 
+- Indexes improve performance by allowing the database to quickly find rows that fit query requirements, eliminating full table scans. 
+- For example, an index on 'customer_id' in the 'loans' table can speed up searches for a customer's loan information. 3. Views: How might views make querying easier while also improving data security? 
+- Simplify querying: Views group commonly used or complex queries into a single, reusable structure. Example: The 'overdue_loans' view saves the need to continually write the filter criteria 'due_date < SYSDATE'. 
+- Improve Data Security: Views can hide important data or limit rows that fit certain criteria. For example, a view for customer assistance may omit critical loan information such as interest rates.
+
+3. Views: How can views simplify querying and enhance data security?  
+
+ - Simplify querying: Views group commonly used or complex queries into a single, reusable structure. Example: The 'overdue_loans' view saves the need to continually write the filter criteria 'due_date < SYSDATE'. 
+- Improve Data Security: Views can hide important data or limit rows that fit certain criteria. For example, a view for customer assistance may omit critical loan information such as interest rates.
+
+4. Transactions: Explain when to use ROLLBACK versus SAVEPOINT
+
+- ROLLBACK: Reverts all changes made in a transaction, which is commonly used when a significant error occurs. For example, cancelling the entire loan payout process owing to invalid customer information. 
+- SAVEPOINT: Enables partial rollbacks by placing markers during a transaction. For example, while modifying several loans, a 'SAVEPOINT' allows you to undo modifications to specific loans without undoing all revisions. 
+
+
+5. Backup Importance: Why is backup critical in database management?
+
+- Because backups are critical for restoring data in the event of inadvertent deletion, corruption, or device failure.
+- Regular backups of financial documents, such as loans, ensure regulatory compliance and protect sensitive consumer information.
